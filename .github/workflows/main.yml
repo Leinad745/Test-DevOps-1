@@ -2,7 +2,7 @@ name: django-web
 on:
   push:
     branches:
-            - master #Nombre de la rama
+            - main #Nombre de la rama
 jobs:
     build:
             runs-on: ubuntu-latest #Sistema operativo
@@ -10,7 +10,7 @@ jobs:
                     - name: Comprobar repositorio
                       uses: actions/checkout@v2 #Comprobar el repositorio
                     
-                    - name: Configurar e Instalar Python
+                    - name: gConfigurar e Instalar Python
                       uses: actions/setup-python@v2 #Configurar el entorno de Python
                       with:
                             python-version: '3.13' #Version de Python
@@ -19,3 +19,8 @@ jobs:
                       run: |
                         cd ejercicioTrackDevops1 #Entrar a la carpeta del proyecto
                         pip install -r requirements.txt #Instalar dependencias en el archivo requirements.txt
+
+                    - name: Ejecutar pruebas
+                      run: |
+                            cd ejercicioTrackDevops1
+                            python manage.py test #Ejecutar pruebas de Django
