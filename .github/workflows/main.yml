@@ -17,10 +17,10 @@ jobs:
                     
                     - name: Instalar dependencias
                       run: |
-                        cd Ejercicio 1
+                        cd Ejercicio 1\ejercicioTrackDevops1-main
                         pip install -r requirements.txt #Instalar dependencias en el archivo requirements.txt
 
                     - name: Ejecutar pruebas
                       run: |
-                            cd Ejercicio 1\ejercicioTrackDevops1-main
+                            cd Ejercicio 1
                             python manage.py test #Ejecutar pruebas de Django
