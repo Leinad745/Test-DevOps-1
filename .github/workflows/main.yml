@@ -22,5 +22,5 @@ jobs:
 
                     - name: Ejecutar pruebas
                       run: |
-                            cd Ejercicio1
+                            cd Ejercicio1\ejercicioTrackDevops1-main
                             python manage.py test #Ejecutar pruebas de Django
