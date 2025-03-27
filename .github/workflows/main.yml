@@ -10,14 +10,13 @@ jobs:
                     - name: Comprobar repositorio
                       uses: actions/checkout@v2 #Comprobar el repositorio
                     
-                    - name: gConfigurar e Instalar Python
+                    - name: Configurar e Instalar Python
                       uses: actions/setup-python@v2 #Configurar el entorno de Python
                       with:
                             python-version: '3.13' #Version de Python
                     
                     - name: Instalar dependencias
                       run: |
-                        cd ejercicioTrackDevops1 #Entrar a la carpeta del proyecto
                         pip install -r requirements.txt #Instalar dependencias en el archivo requirements.txt
 
                     - name: Ejecutar pruebas
