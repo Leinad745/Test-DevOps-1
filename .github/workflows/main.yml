@@ -24,3 +24,17 @@ jobs:
                       run: |
                             cd ejercicioTrackDevops1-main
                             python manage.py test #Ejecutar pruebas de Django
+
+                    - name : Crear carpeta en AWS
+                      uses: appleboy/ssh-action@v1
+                      with:
+                          host: ${{ secrets.PUBLIC_IP_SERVER }} #ES UN SECRETO
+                          username: ${{secrets.USERNAME_DEVOPS}}
+                          key: ${{ secrets.PEM_KEY_DEVOPS }} #QUE TU CONTRASEÑA Y LA MIA
+                          port: ${{secrets.DEVOPS_PORT}} #UN PUERTO
+                          script: |
+                                    whoami
+                                    mkdir -p /home/ubuntu/ejercicioTrackDevops1
+                                    
+
+
