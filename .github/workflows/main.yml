@@ -35,6 +35,30 @@ jobs:
                           script: |
                                     whoami
                                     mkdir -p /home/ubuntu/ejercicioTrackDevops1
-                                    
+                    - name : Copiar archivos en AWS
+                      uses: burnett01/rsync-deployments@7.0.2
+                      with:
+                        switches: -avzr --delete
+                        path: "./"
+                        remote_path: "/home/ubuntu/ejercicioTrackDevops1/"
+                        remote_host: ${{ secrets.PUBLIC_IP_SERVER }}
+                        remote_user: ${{secrets.USERNAME_DEVOPS}}
+                        remote_key: ${{ secrets.PEM_KEY_DEVOPS }}
+                        remote_port: ${{secrets.DEVOPS_PORT}}
 
-
+                    - name : Instalar dependencias en AWS
+                      uses: appleboy/ssh-action@v1
+                      with:
+                            host: ${{ secrets.PUBLIC_IP_SERVER }} #ES UN SECRETO
+                            username: ${{secrets.USERNAME_DEVOPS}}
+                            key: ${{ secrets.PEM_KEY_DEVOPS }} #QUE TU CONTRASEÑA Y LA MIA
+                            port: ${{secrets.DEVOPS_PORT}} #UN PUERTO
+                            script: |
+                                      whoami
+                                      cd /home/ubuntu/ejercicioTrackDevops1/ejercicioTrackDevops1-main
+                                      sudo apt install python3.12-venv -y
+                                      python3.12 -m venv venv
+                                      source venv/bin/activate
+                                      pip3 install -r requirements.txt
+                                      nohup python3 manage.py runserver 0.0.0.0:8000 --noreload > /dev/null 2>&1 &
+                                      exit 0 # Salir del script sin errores
